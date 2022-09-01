@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Idbbisew from './Idbbisew'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Idbbisew />
+    <hr/><br/>
+    <App/>
   </React.StrictMode>
 );
 reportWebVitals();
@@ -39,3 +43,5 @@ const AplusBSq = (a,b) => {
 const sq = a => a*a; 
 console.log(AplusBSq(5,6));
 console.log(sq(5));
+
+

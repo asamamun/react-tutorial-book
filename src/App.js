@@ -1,28 +1,55 @@
-// import {React} from "react";
-import * as React from "react";
+import {React, useState} from "react";
+// import * as React from "react";
 // import { ReactDOM } from "react-dom";
 import "./App.css";
 import Developer from "./Developer";
-const list = [
-  {
-  title: 'React',
-  url: 'https://reactjs.org/',
-  author: 'Jordan Walke',
-  num_comments: 3,
-  points: 4,
-  objectID: 0,
-  },
-  {
-  title: 'Redux',
-  url: 'https://redux.js.org/',
-  author: 'Dan Abramov, Andrew Clark',
-  num_comments: 2,
-  points: 5,
-  objectID: 1,
-  },
-  ];
 
+
+//counter component
+const Counter = () => {
+  //you can only se value of co using function chan
+  const [co, chan] = useState(10);
+  const increse = (n) => chan(++n)
+  const decrese = (n) => chan(--n)
+  // function decrese(){ chan(--co);}
+  
+  return(
+    <fieldset>
+      <legend>Counter</legend>
+      <button onClick={() => chan(co + 1)}>
+       +
+      </button>
+      <button onClick={() => chan(co - 1)}>
+        -
+      </button>
+      <button onClick={() => increse(co)}>increse</button>
+      <button onClick={() => decrese(co)}>decrese</button>
+
+      <br></br>
+      <h1>{co}</h1>
+    </fieldset>
+  )
+}
   const App = () =>{
+    const list = [
+      {
+      title: 'React',
+      url: 'https://reactjs.org/',
+      author: 'Jordan Walke',
+      num_comments: 3,
+      points: 4,
+      objectID: 0,
+      },
+      {
+      title: 'Redux',
+      url: 'https://redux.js.org/',
+      author: 'Dan Abramov, Andrew Clark',
+      num_comments: 2,
+      points: 5,
+      objectID: 1,
+      },
+      ];
+    const topic = "React";
 // you can do something in between
 const d = new Developer("IDB","BISEW");
 function sq(n){return n*n;}
@@ -43,10 +70,9 @@ return (
 <h1>{w.title}</h1>
 <p> {w.greeting}</p>
 <h3>{sq(x)}</h3>
-<Search/>
+<Search formvalue={topic} aa="bb" />
 <hr/>
-<List />
-<List />
+<List listitems={list} />
 {/*   <ul>
   {
     list.map(function(o,i){
@@ -61,7 +87,8 @@ return (
         
     })
   }
-</ul> */}  
+</ul> */}
+<Counter/> 
 </div>
  );
   }
@@ -69,14 +96,25 @@ return (
 /* function App() {
   
 } */
-const Search = () => {
+const Search = (props) => {
+  const [searchTerm, setsearchTerm] = useState('yourrr search item');
+ 
   const handleChange = (event) =>{
-    console.log(event);
+    //searchTerm = event.target.value;
+    //console.log(event.target.value);
+    setsearchTerm(event.target.value);
+    
   }
   return (
     <div>
+      {props.aa}
     <label htmlFor="search" className="bg-red">Search: </label>
-    <input id="search" type="text" onChange={handleChange} />
+    <input id="search"  type="text" onChange={handleChange} />
+    {/* <input id="search" value={props.formvalue} type="text" onChange={handleChange} /> */}
+    <hr></hr>
+    <p>
+Searching for <strong>{searchTerm}</strong>.
+</p>
     </div>
   );
 }
@@ -84,45 +122,27 @@ const Search = () => {
 /* function Search() {
   
 } */
-
-const List = () =>{
+const Myitem = (props) =>
+(
+  <li>
+<span>
+<a href={props.item.url}>{props.item.title}</a>
+</span>
+<span>{props.item.author}</span>
+<span>{props.item.num_comments}</span>
+<span>{props.item.points}</span>
+</li>
+);
+const List = (props) =>{
   return (
-    <ul>
+    <ul>      
     {
-      list.map((item) => {
-return(<li key={item.objectID}>
-  <span>
-  <a href={item.url}>{item.title}</a>
-  </span>
-  <span>{item.author}</span>
-  <span>{item.num_comments}</span>
-  <span>{item.points}</span>
-  </li>)
-        
-
+      props.listitems.map((i) => {
+      return <Myitem key={i.objectID} item={i} />
       } )
-/*     list.map(function (item) {
-    return (
-    <li key={item.objectID}>
-    <span>
-    <a href={item.url}>{item.title}</a>
-    </span>
-    <span>{item.author}</span>
-    <span>{item.num_comments}</span>
-    <span>{item.points}</span>
-    </li>
-    );
-    }) */
     }
     </ul>
     );
 }
-
-/* function List() {
-
-  } */
-
-
-
 
 export default App;
