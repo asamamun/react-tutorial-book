@@ -31,6 +31,10 @@ const Counter = () => {
   )
 }
   const App = () =>{
+    const [searchTerm, setSearchTerm] = useState('Re');
+    const handleSearch = (event) => {
+      setSearchTerm(event.target.value);
+      };
     const list = [
       {
       title: 'React',
@@ -49,45 +53,19 @@ const Counter = () => {
       objectID: 1,
       },
       ];
-    const topic = "React";
-// you can do something in between
-const d = new Developer("IDB","BISEW");
-function sq(n){return n*n;}
-const w = {
-  greeting: 'welcome to react 2',
-  title: d.getName(),
-};
-
-function getTitle(){
-  return w.title;
-}
-
-let x = 5;
+      const searchedStories = list.filter(function (l) {
+        return l.title.toLowerCase().includes(searchTerm.toLowerCase());
+        // return l.title.includes(searchTerm);
+        });
 
 return (
   <div> 
-<h1>{getTitle()}</h1>
-<h1>{w.title}</h1>
-<p> {w.greeting}</p>
-<h3>{sq(x)}</h3>
-<Search formvalue={topic} aa="bb" />
+<Search search={searchTerm} onSearch={handleSearch} />
+{searchTerm}
 <hr/>
-<List listitems={list} />
-{/*   <ul>
-  {
-    list.map(function(o,i){
-      return <li key={i}>
-        index : {i} <br/>
-        Title : {o.title} <br />
-        Url : {o.url} <br/>
-        Author : {o.author} <br/>
-        Number Of Comments : {o.num_comments} <br/>
-        points : {o.points} <br/>          
-        </li>
-        
-    })
-  }
-</ul> */}
+{}
+{/* <List listitems={(searchTerm=='item')?itemlist:list} /> */}
+<List listitems={searchedStories} />
 <Counter/> 
 </div>
  );
@@ -96,25 +74,16 @@ return (
 /* function App() {
   
 } */
-const Search = (props) => {
-  const [searchTerm, setsearchTerm] = useState('yourrr search item');
- 
-  const handleChange = (event) =>{
-    //searchTerm = event.target.value;
-    //console.log(event.target.value);
-    setsearchTerm(event.target.value);
-    
-  }
+const Search = ({ search, onSearch }) => {
+  // const { search, onSearch } = props;
   return (
     <div>
-      {props.aa}
-    <label htmlFor="search" className="bg-red">Search: </label>
-    <input id="search"  type="text" onChange={handleChange} />
-    {/* <input id="search" value={props.formvalue} type="text" onChange={handleChange} /> */}
-    <hr></hr>
-    <p>
-Searching for <strong>{searchTerm}</strong>.
-</p>
+    <label htmlFor="search">Search 11: </label>
+    <input      
+    id="search" 
+    type="text"
+    value={search} 
+    onChange={onSearch} />
     </div>
   );
 }
@@ -133,11 +102,12 @@ const Myitem = (props) =>
 <span>{props.item.points}</span>
 </li>
 );
-const List = (props) =>{
+
+const List = ({listitems}) =>{
   return (
     <ul>      
     {
-      props.listitems.map((i) => {
+      listitems.map((i) => {
       return <Myitem key={i.objectID} item={i} />
       } )
     }
