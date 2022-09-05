@@ -45,3 +45,84 @@ console.log(AplusBSq(5,6));
 console.log(sq(5));
 
 
+// Object Destructuring
+let a, b, rest;
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+console.log(rest);
+
+const obj = { a:5,b:6,c: 10, d: 2 };
+const { c, d } = obj;
+console.log(c + " : " + d);
+/* const user = {
+  firstName: 'Robin',
+  lastName: 'Wieruch',
+  };
+  const {firstName} = user;
+  console.log(firstName); */
+
+  //nested destructuring
+  const user1 = {
+    firstName: 'Robin',
+    pet: {
+    name: 'Trixi',
+
+    },
+    };
+/*     const {firstName,pet} = user1;
+    console.log(pet.name); */
+    const {firstName,pet:{name}} = user1;
+    console.log(name);
+
+    //spread and rest operator
+    function sum(x, y, z) {
+      return x + y + z;
+    }
+    const numbers = [1, 2, 3];
+    // const numbers2 = [10, 20, 30, numbers];
+    const numbers2 = [10, 20, 30, ...numbers];
+    console.log(numbers2);
+
+    console.log(numbers);
+    console.log(sum(...numbers));
+
+    const profile = {
+      firstName: 'Robin',
+      lastName: 'Wieruch',
+      };
+      const address = {
+      country: 'Germany',
+      city: 'Berlin',
+      };
+      const user = {
+      ...profile,
+      gender: 'male',
+      ...address,
+      };
+      console.log(user);
+
+
+      //rest operator
+      function rsum(...theArgs) {
+        // console.log(theArgs);
+         let total = 0;
+        for (const arg of theArgs) {
+          total += arg;
+        }
+        return total; 
+      }
+      
+      console.log(rsum(1, 2, 3,22,33,44,11,0));
+      // expected output: 6
+      
+      console.log(rsum(1, 2, 3, 4));
+      // expected output: 10
+
+      const user2 = {
+        id: '1',
+        firstName: 'Robin',
+        lastName: 'Wieruch',
+        country: 'Germany',
+        city: 'Berlin',
+        };
+        const { id, ...userWithoutAddress } = user2;
+        console.log(userWithoutAddress);

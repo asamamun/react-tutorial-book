@@ -60,7 +60,7 @@ const Counter = () => {
 
 return (
   <div> 
-<Search search={searchTerm} onSearch={handleSearch} />
+<Search search={searchTerm} onSearch={handleSearch} title="search title" />
 {searchTerm}
 <hr/>
 {}
@@ -91,15 +91,21 @@ const Search = ({ search, onSearch }) => {
 /* function Search() {
   
 } */
-const Myitem = (props) =>
+const Myitem = ({  
+  title,
+  url,
+  author,
+  num_comments,
+  points,
+  }) =>
 (
   <li>
 <span>
-<a href={props.item.url}>{props.item.title}</a>
-</span>
-<span>{props.item.author}</span>
-<span>{props.item.num_comments}</span>
-<span>{props.item.points}</span>
+<a href={url}>{title}</a>
+</span> 
+<span>{author}</span>
+<span>{num_comments}</span>
+<span>{points}</span>
 </li>
 );
 
@@ -107,8 +113,8 @@ const List = ({listitems}) =>{
   return (
     <ul>      
     {
-      listitems.map((i) => {
-      return <Myitem key={i.objectID} item={i} />
+      listitems.map(({objectID,...i}) => {
+      return <Myitem key={objectID} {...i} />
       } )
     }
     </ul>
