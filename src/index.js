@@ -27,20 +27,20 @@ Warning: ReactDOM.render is no longer supported in React 18. Use createRoot inst
 
 /* function x(){ console.log("hi");}
 x(); */
-const x = () => {
+/* const x = () => {
   console.log("arrow function working");
 } 
 x();
 const AplusBSq = (a,b) => {
   return a*a + 2*a*b+b*b;
-}
+} */
 /* const sq = (a) => {
   return a*a;
 } */
 /* const sq = a => {
   return a*a;
 } */
-const sq = a => a*a; 
+/* const sq = a => a*a; 
 console.log(AplusBSq(5,6));
 console.log(sq(5));
 
@@ -52,7 +52,7 @@ console.log(rest);
 
 const obj = { a:5,b:6,c: 10, d: 2 };
 const { c, d } = obj;
-console.log(c + " : " + d);
+console.log(c + " : " + d); */
 /* const user = {
   firstName: 'Robin',
   lastName: 'Wieruch',
@@ -61,15 +61,15 @@ console.log(c + " : " + d);
   console.log(firstName); */
 
   //nested destructuring
-  const user1 = {
+/*   const user1 = {
     firstName: 'Robin',
     pet: {
     name: 'Trixi',
 
     },
-    };
+    }; */
 /*     const {firstName,pet} = user1;
-    console.log(pet.name); */
+    console.log(pet.name); *//* 
     const {firstName,pet:{name}} = user1;
     console.log(name);
 
@@ -125,4 +125,4 @@ console.log(c + " : " + d);
         city: 'Berlin',
         };
         const { id, ...userWithoutAddress } = user2;
-        console.log(userWithoutAddress);
+        console.log(userWithoutAddress); */
